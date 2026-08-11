@@ -1,37 +1,22 @@
-# Backend Legion Store
+# Backend Firestore - Legion Store
 
-## Configuration
-Le projet utilise Firebase Firestore côté client. Remplacer les valeurs de `src/firebase.js` par celles d'un projet Firebase gratuit, puis activer Firestore. Le formulaire transmet une demande de commande, sans paiement en ligne.
+Configuration : remplacer les valeurs de `src/firebase.js` par celles d’un projet Firebase gratuit, activer Firestore et Authentication par e-mail/mot de passe.
 
 ## Collections
 
-### `products`
-- `name` : nom du modèle
-- `slug` : identifiant public
-- `price` : prix numérique contrôlé côté serveur ou par une Cloud Function en production
-- `stock` : quantité disponible
-- `specs` : tableau de spécifications
-- `images` : tableau d'URL de visuels validés
-- `tag` : catégorie courte
-- `createdAt`, `updatedAt` : timestamps
-
-### `orders`
-- `customer.name`, `customer.email`, `customer.phone`
-- `items[]` : `productId`, `name`, `quantity`, `unitPrice`
-- `total` : sous-total calculé côté serveur en production
-- `status` : `nouvelle`, `en cours`, `confirmée` ou `annulée`
-- `createdAt`, `updatedAt`
-
-### `messages`
-- `name`, `email`, `phone`, `message`, `createdAt`, `status`
+- `products`: `name`, `category`, `price`, `stock`, `available`, `description`, `images[]`, `specs{}`, `createdAt`, `updatedAt`.
+- `orders`: `name`, `email`, `phone`, `address`, `notes`, `items[]` contenant `id`, `name`, `price`, `quantity`, `image`, `total`, `status` (`new`, `in_progress`, `processed`, `cancelled`), `createdAt`, `updatedAt`.
+- `messages`: `name`, `email`, `message`, `status`, `createdAt`.
 
 ## Relations
-`orders.items[].productId` référence `products/{productId}`. Les demandes conservent aussi le nom et le prix au moment de l'envoi pour l'historique. Il n'y a pas de compte client dans le MVP.
 
-## Opérations prévues
-- Catalogue : lecture publique de `products`, filtrage et tri côté client.
-- Demande : création de `orders` depuis le formulaire.
-- Contact : création de `messages` si un formulaire de contact séparé est ajouté.
-- Administration après MVP : CRUD des produits et lecture / mise à jour du statut des commandes, derrière authentification Firebase Admin.
+Les éléments de `orders.items` référencent un produit par son identifiant `products.id`. Le panier reste local au navigateur jusqu’à la validation. La création d’une commande utilise une transaction Firestore qui vérifie et décrémente le stock.
 
-Les règles de `firestore.rules` doivent être collées manuellement dans la console Firebase. En production, déplacer le calcul du prix et la validation de stock côté serveur ou Cloud Functions.
+## Opérations CRUD
+
+- Catalogue : lecture publique de `products`.
+- Administration : création, lecture, modification et suppression de `products`.
+- Commande : création publique validée par transaction, lecture et modification des statuts réservées à l’administration.
+- Contact : création publique de `messages`; consultation réservée à l’administration, à ajouter si nécessaire dans l’interface.
+
+Les règles présentes dans `firestore.rules` doivent être collées manuellement dans la console Firebase. L’administration doit utiliser un compte Firebase dont le custom claim `admin` vaut `true`. Le paiement, les comptes clients, l’expédition et les e-mails automatisés restent hors MVP.
