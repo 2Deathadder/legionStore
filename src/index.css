@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Rajdhani:wght@500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root { color-scheme: dark; font-family: Inter, sans-serif; background: #090b0e; color: #f4f7f5; }
+:root { color-scheme: dark; font-family: Sora, sans-serif; background: #09090b; color: #f4f4f5; }
 * { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: radial-gradient(circle at 85% 8%, rgba(210, 28, 48, .13), transparent 28rem), #090b0e; }
-button { font: inherit; }
-.grid-noise { background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 36px 36px; }
-.clip-corner { clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%); }
-.glow-red { box-shadow: 0 0 34px rgba(226, 35, 55, .18); }
+body { margin: 0; min-width: 320px; background: #09090b; }
+button, input, textarea, select { font: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible, textarea:focus-visible { outline: 2px solid #ef3340; outline-offset: 3px; }
+.grid-tech { background-image: linear-gradient(rgba(255,255,255,.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.035) 1px, transparent 1px); background-size: 32px 32px; }
