@@ -1,5 +1,2 @@
-export default {
-  content: ['./index.html', './src/**/*.{js,jsx}'],
-  theme: { extend: { fontFamily: { sans: ['Inter', 'ui-sans-serif', 'system-ui'], display: ['Rajdhani', 'Inter', 'sans-serif'] } } },
-  plugins: []
-}
+/** @type {import('tailwindcss').Config} */
+export default { content: ['./index.html', './src/**/*.{js,jsx}'], theme: { extend: { fontFamily: { sans: ['Sora', 'ui-sans-serif', 'system-ui'] }, colors: { legion: '#ef3340' } } }, plugins: [] }
