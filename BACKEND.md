@@ -1,39 +1,37 @@
 # Backend Legion Store
 
-Le projet utilise Firebase Firestore via le SDK client. La configuration est à remplacer dans `src/firebase.js`.
+## Configuration
+Le projet utilise Firebase Firestore côté client. Remplacer les valeurs de `src/firebase.js` par celles d'un projet Firebase gratuit, puis activer Firestore. Le formulaire transmet une demande de commande, sans paiement en ligne.
 
 ## Collections
 
-### products
-- `name`: nom du modèle
-- `description`: présentation courte
-- `price`: prix en euros
-- `stock`: quantité disponible
-- `availability`: libellé de disponibilité
-- `featured`: mise en avant booléenne
-- `image`: URL du visuel
-- `specs`: objet de caractéristiques techniques
+### `products`
+- `name` : nom du modèle
+- `slug` : identifiant public
+- `price` : prix numérique contrôlé côté serveur ou par une Cloud Function en production
+- `stock` : quantité disponible
+- `specs` : tableau de spécifications
+- `images` : tableau d'URL de visuels validés
+- `tag` : catégorie courte
+- `createdAt`, `updatedAt` : timestamps
 
-### orders
-- `name`, `email`, `phone`, `address`, `note`: coordonnées de commande
-- `items`: snapshot des produits et quantités
-- `subtotal`: montant calculé côté client, à recalculer côté serveur avant traitement réel
-- `status`: `nouvelle`, puis états de traitement
-- `createdAt`: horodatage Firestore
+### `orders`
+- `customer.name`, `customer.email`, `customer.phone`
+- `items[]` : `productId`, `name`, `quantity`, `unitPrice`
+- `total` : sous-total calculé côté serveur en production
+- `status` : `nouvelle`, `en cours`, `confirmée` ou `annulée`
+- `createdAt`, `updatedAt`
 
-### messages
-- `name`, `email`, `message`: contenu du formulaire de contact
-- `createdAt`: horodatage Firestore
+### `messages`
+- `name`, `email`, `phone`, `message`, `createdAt`, `status`
 
-## Relations et opérations
+## Relations
+`orders.items[].productId` référence `products/{productId}`. Les demandes conservent aussi le nom et le prix au moment de l'envoi pour l'historique. Il n'y a pas de compte client dans le MVP.
 
-Les commandes contiennent un snapshot des produits, afin de conserver le prix et le nom au moment de la demande. Il n'y a pas de compte client dans le MVP. Le panier reste dans `sessionStorage` et n'est pas une collection Firestore.
+## Opérations prévues
+- Catalogue : lecture publique de `products`, filtrage et tri côté client.
+- Demande : création de `orders` depuis le formulaire.
+- Contact : création de `messages` si un formulaire de contact séparé est ajouté.
+- Administration après MVP : CRUD des produits et lecture / mise à jour du statut des commandes, derrière authentification Firebase Admin.
 
-- Catalogue: lecture de `products`, filtrage côté client.
-- Administration: création, modification et suppression de `products`.
-- Commande: création d'un document `orders`, puis vidage du panier de session.
-- Contact: création d'un document `messages`.
-
-L'interface d'administration proposée est une première couche UI. L'authentification Firebase doit remplacer le bouton de démonstration avant mise en production, avec un contrôle de rôle administrateur.
-
-Les règles ci-jointes doivent être collées manuellement dans Firebase Console > Firestore Database > Règles, car elles ne se déploient pas automatiquement depuis GitHub. Pour une sécurité complète, les prix et le stock doivent être validés dans une fonction serveur ou une Cloud Function avant acceptation d'une commande.
+Les règles de `firestore.rules` doivent être collées manuellement dans la console Firebase. En production, déplacer le calcul du prix et la validation de stock côté serveur ou Cloud Functions.
