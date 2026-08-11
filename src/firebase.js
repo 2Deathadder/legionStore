@@ -1,17 +1,17 @@
 import { initializeApp } from 'firebase/app'
 import { getFirestore } from 'firebase/firestore'
+import { getAuth } from 'firebase/auth'
 
-// À REMPLACER - crée un projet gratuit sur https://console.firebase.google.com
 const firebaseConfig = {
-  apiKey: 'A_REMPLACER',
-  authDomain: 'A_REMPLACER.firebaseapp.com',
-  projectId: 'A_REMPLACER',
-  storageBucket: 'A_REMPLACER.firebasestorage.app',
-  messagingSenderId: 'A_REMPLACER',
-  appId: 'A_REMPLACER'
+  apiKey: 'À REMPLACER',
+  authDomain: 'À REMPLACER.firebaseapp.com',
+  projectId: 'À REMPLACER',
+  storageBucket: 'À REMPLACER.appspot.com',
+  messagingSenderId: 'À REMPLACER',
+  appId: 'À REMPLACER'
 }
 
-const isConfigured = firebaseConfig.apiKey !== 'A_REMPLACER'
-let db = null
-if (isConfigured) db = getFirestore(initializeApp(firebaseConfig))
-export { db, isConfigured }
+// À REMPLACER - crée un projet gratuit sur https://console.firebase.google.com
+const app = initializeApp(firebaseConfig)
+export const db = getFirestore(app)
+export const auth = getAuth(app)
