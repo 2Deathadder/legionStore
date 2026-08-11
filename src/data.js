@@ -1,0 +1,6 @@
+export const demoProducts = [
+ {id:'demo-1',name:'Legion 5 16IRX9',category:'Legion 5',price:1399,stock:7,available:true,description:'Un portable gaming équilibré pour jouer en 1440p et travailler confortablement.',images:['https://picsum.photos/seed/legion-laptop-red/1000/720'],specs:{Processeur:'Intel Core i7-14650HX',GPU:'NVIDIA RTX 4060 8 Go',RAM:'16 Go DDR5',Stockage:'1 To SSD NVMe',Écran:'16 pouces, 165 Hz'}},
+ {id:'demo-2',name:'Legion Pro 5 16IRX9',category:'Legion Pro',price:1899,stock:3,available:true,description:'Une machine plus rapide pour les jeux exigeants, la création et le multitâche.',images:['https://picsum.photos/seed/legion-pro-black/1000/720'],specs:{Processeur:'Intel Core i9-14900HX',GPU:'NVIDIA RTX 4070 8 Go',RAM:'32 Go DDR5',Stockage:'1 To SSD NVMe',Écran:'16 pouces, 240 Hz'}},
+ {id:'demo-3',name:'Legion Slim 5 16AHP9',category:'Legion Slim',price:1299,stock:0,available:false,description:'Un format fin qui conserve l’essentiel de l’expérience Legion.',images:['https://picsum.photos/seed/legion-slim-dark/1000/720'],specs:{Processeur:'AMD Ryzen 7 8845HS',GPU:'NVIDIA RTX 4060 8 Go',RAM:'16 Go DDR5',Stockage:'1 To SSD NVMe',Écran:'16 pouces, 165 Hz'}}
+]
+export const money = n => new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(n)
