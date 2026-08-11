@@ -2,16 +2,4 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-:root { font-family: 'Outfit', sans-serif; color: #f4f4f5; background: #090a0d; font-synthesis: none; }
-* { box-sizing: border-box; }
-body { margin: 0; min-width: 320px; background: #090a0d; }
-button, input, select, textarea { font: inherit; }
-button { cursor: pointer; }
-::selection { background: #ef233c; color: white; }
-@layer components {
-  .panel { @apply border border-zinc-800 bg-zinc-950/80; }
-  .control { @apply w-full rounded-lg border border-zinc-700 bg-zinc-900 px-3 py-2.5 text-sm text-zinc-100 outline-none transition focus:border-red-500 focus:ring-1 focus:ring-red-500; }
-  .primary { @apply inline-flex items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-50; }
-  .secondary { @apply inline-flex items-center justify-center gap-2 rounded-lg border border-zinc-700 px-4 py-2.5 text-sm font-semibold text-zinc-200 transition hover:border-zinc-500 hover:bg-zinc-900; }
-}
+:root{font-family:Outfit,ui-sans-serif,system-ui;color:#171717;background:#f7f6f2}*{box-sizing:border-box}body{margin:0;min-width:320px}.dark body{background:#0c0d0f}.dark{color-scheme:dark}button,input,textarea,select{font:inherit}.focus-ring:focus-visible{outline:3px solid #ef4444;outline-offset:2px}@media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
