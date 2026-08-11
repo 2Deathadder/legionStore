@@ -1,2 +1,2 @@
 /** @type {import('tailwindcss').Config} */
-export default { content: ['./index.html','./src/**/*.{js,jsx}'], theme: { extend: { fontFamily: { display: ['Sora','sans-serif'], sans: ['Outfit','sans-serif'] } } }, plugins: [] }
+export default { darkMode: 'class', content: ['./index.html','./src/**/*.{js,jsx}'], theme: { extend: { fontFamily: { sans: ['Outfit','ui-sans-serif','system-ui'], display: ['Sora','Outfit','sans-serif'] } } }, plugins: [] }
